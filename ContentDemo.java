@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.time.Year;
+
+public class ContentDemo {
+
+    public static void main(String[] args) {
+
+        ArrayList<ContentItem> items = new ArrayList<>();
+
+        items.add(new VideoLecture("Java OOP Basics", 2024, 60, "HD"));
+        items.add(new VideoLecture("Advanced Java", 2022, 90, "4K"));
+
+        items.add(new PodcastEpisode("Tech Talk", 2023, 45, "Alex"));
+        items.add(new PodcastEpisode("Coding Life", 2021, 30, "Maria"));
+
+        int currentYear = Year.now().getValue();
+
+        for (ContentItem item : items) {
+            System.out.println(item +
+                    " | License Cost = " +
+                    item.getLicenseCost(currentYear));
+
+            if (item instanceof Downloadable) {
+                Downloadable d = (Downloadable) item;
+                d.download();
+                System.out.println("Max downloads per day: " +
+                        d.getMaxDownloadsPerDay());
+            }
+
+            System.out.println("-----------------------------");
+        }
+    }
+}
